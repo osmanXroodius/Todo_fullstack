@@ -6,16 +6,16 @@ const z = require('zod')
 
 
 function usermiddleware(req,res,next){
-    const authen = req.headers.authentication;
+    const authen = req.headers.authorization;
 
     if(!authen || !authen.startsWith("Bearer ")){
         return res.status(401).json({msg:"Autherization failed. No access Token"})
     }
 
-    const Token =   authen.split(" ");
+    const Token =   authen.split(" ")[1]
     try{
         const decoded = jwt.verify(Token, jwt_secret)
-        req.username = decoded
+        req.user = decoded
         next()
     }catch(err){
         console.log(err)
