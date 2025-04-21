@@ -1,19 +1,19 @@
 const express = require('express');
 const app = express();
 require('dotenv').config();
-const port = process.env.port
-console.log(port)
+const PORT = process.env.PORT
+console.log(PORT)
 
 
-app.use('user',)
-app.use('todo',)
-
-
-
+// app.use('user',)
+// app.use('todo',)
 
 
 
-app.listen(port, () => console.log(`server Running on port ${port}`))
+
+
+
+app.listen(PORT, () => console.log(`server Running on port ${PORT}`))
 
 
 
