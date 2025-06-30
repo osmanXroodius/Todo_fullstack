@@ -35,11 +35,19 @@ router.get('/Gettodo',usermiddleware ,async (req,res) => {
 })
 
 router.get('/Gettodo/:id',usermiddleware,async (req,res) => {
-    const TodoID  = req.params.id;
-    // const Newid  = TodoID.toString();
-    const findById = await TodoDb.findById(TodoID)
-    
-    res.status(200).json({YourTodo : findById});
+    const id = req.params.id;
+
+  try {
+    const todo = await TodoDb.findById(id);
+
+    if (!todo) {
+      return res.status(404).json({ error: "Todo not found" });
+    }
+
+    res.status(200).json({ YourTodo: todo });
+  } catch (error) {
+    res.status(500).json({ error: "Invalid ID or server error" });
+  }
 })
  
 router.put('/Updatetodo/:id',usermiddleware, async (req,res) => {
